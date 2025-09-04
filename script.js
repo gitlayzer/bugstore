@@ -4,7 +4,7 @@
 //      替换成你在 GitHub OAuth App 中设置的 Client ID
 //
 // ======================================================
-const GITHUB_CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID';
+const GITHUB_CLIENT_ID = 'Ov23liRFQjTyroFo9EhN\n';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('github_token');
