@@ -1,0 +1,15 @@
+# Dependency directories
+node_modules/
+
+# Vercel build output
+.vercel/
+
+# Environment variables file
+.env
+.env.local
+
+# macOS specific files
+.DS_Store
+
+# idea
+.idea

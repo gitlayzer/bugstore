@@ -1,0 +1,22 @@
+{
+  "name": "bugstore",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "keywords": [
+    "github",
+    "issues",
+    "bug-tracker",
+    "vercel"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "vercel": "^47.0.4"
+  }
+}

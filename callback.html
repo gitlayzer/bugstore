@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正在登录...</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: var(--card-background-color); }
+    </style>
+</head>
+<body>
+<article>
+    <p aria-busy="true">正在验证您的身份，请稍候...</p>
+</article>
+<script>
+    (async () => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const code = queryParams.get('code');
+
+        if (code) {
+            try {
+                const response = await fetch('/api/auth-callback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code }),
+                });
+
+                const data = await response.json();
+
+                if (data.token) {
+                    localStorage.setItem('github_token', data.token);
+                    window.location.href = '/';
+                } else {
+                    throw new Error(data.error || '认证失败');
+                }
+            } catch (error) {
+                document.body.innerHTML = `<main class="container"><article><h2>登录失败</h2><p>${error.message}</p><a href="/" role="button">返回主页</a></article></main>`;
+            }
+        } else {
+            document.body.innerHTML = `<main class="container"><article><h2>无效的回调</h2><p>授权码 (code) 不存在。</p><a href="/" role="button">返回主页</a></article></main>`;
+        }
+    })();
+</script>
+</body>
+</html>

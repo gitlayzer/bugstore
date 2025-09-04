@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug 反馈</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="container">
+    <div id="logged-in-view" class="hidden">
+        <header id="user-info">
+                <span>
+                    <img id="user-avatar" src="" alt="avatar">
+                    已登录为: <strong id="user-login"></strong>
+                </span>
+            <button id="logout-btn" class="secondary outline">退出登录</button>
+        </header>
+        <h1>提交一个 Bug</h1>
+        <p>感谢您的反馈！请详细描述您遇到的问题。</p>
+        <form id="bug-form">
+            <label for="title">问题标题</label>
+            <input type="text" id="title" name="title" placeholder="例如：登录按钮点击无效" required>
+
+            <label for="body">详细描述</label>
+            <textarea id="body" name="body" rows="8" placeholder="请提供详细的复现步骤、期望的结果和实际发生的情况。" required></textarea>
+
+            <button type="submit" id="submit-btn">提交反馈</button>
+        </form>
+        <div id="response-message"></div>
+    </div>
+
+    <div id="logged-out-view">
+        <article>
+            <hgroup>
+                <h1>欢迎</h1>
+                <h3>提交 Bug 前，请先使用 GitHub 账号登录。</h3>
+            </hgroup>
+            <button id="login-btn">使用 GitHub 登录</button>
+        </article>
+    </div>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
