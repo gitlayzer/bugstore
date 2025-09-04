@@ -1,72 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bug 反馈</title>
+    <title>Bug Reporter</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
-    <style>
-        /* Quill 编辑器高度 */
-        #editor-container {
-            height: 250px; /* 设置一个合适的高度 */
-            background-color: var(--background-color);
-            border-bottom-left-radius: var(--border-radius);
-            border-bottom-right-radius: var(--border-radius);
-        }
-        .ql-toolbar.ql-snow {
-            border-top-left-radius: var(--border-radius);
-            border-top-right-radius: var(--border-radius);
-            border-bottom: none;
-        }
-        .ql-container.ql-snow {
-            border-top: none;
-            border-radius: var(--border-radius);
-        }
-        /* 美化登录/注册部分的 hgroup */
-        #logged-out-view hgroup {
-            margin-bottom: 2rem;
-        }
-        #logged-out-view hgroup h1 {
-            margin-bottom: 0.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<header class="app-header">
+    <nav class="container">
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+            <a href="/">Bug Reporter</a>
+        </div>
+        <div id="user-info" class="hidden">
+                <span class="user-details">
+                    <img id="user-avatar" src="" alt="avatar">
+                    <strong id="user-login"></strong>
+                </span>
+            <button id="logout-btn" class="secondary outline contrast">退出</button>
+        </div>
+    </nav>
+</header>
+
 <main class="container">
     <div id="logged-in-view" class="hidden">
-        <header id="user-info">
-                <span>
-                    <img id="user-avatar" src="" alt="avatar">
-                    已登录为: <strong id="user-login"></strong>
-                </span>
-            <button id="logout-btn" class="secondary outline">退出登录</button>
-        </header>
-        <h1>提交一个 Bug</h1>
-        <p>感谢您的反馈！请详细描述您遇到的问题。</p>
-        <form id="bug-form">
-            <label for="title">问题标题</label>
-            <input type="text" id="title" name="title" placeholder="例如：登录按钮点击无效" required>
+        <article class="form-card">
+            <hgroup>
+                <h1>提交一个新的问题</h1>
+                <p>请尽可能详细地描述您遇到的问题，以便我们能更快地解决。
+            </hgroup>
+            <form id="bug-form">
+                <label for="title">问题标题</label>
+                <input type="text" id="title" name="title" placeholder="例如：用户个人资料页面加载失败" required>
 
-            <label for="body-label">详细描述</label>
-            <div id="editor-container"></div>
+                <label for="body-label">详细描述 (支持文本格式和图片粘贴)</label>
+                <div id="editor-container"></div>
 
-            <button type="submit" id="submit-btn">提交反馈</button>
-        </form>
-        <div id="response-message"></div>
+                <button type-="submit" id="submit-btn" class="primary">提交问题</button>
+            </form>
+            <div id="response-message"></div>
+        </article>
     </div>
 
     <div id="logged-out-view">
-        <article>
-            <hgroup>
-                <h1>欢迎</h1>
-                <h3>提交 Bug 前，请先使用 GitHub 账号登录。</h3>
-            </hgroup>
-            <button id="login-btn">使用 GitHub 登录</button>
+        <article class="login-prompt">
+            <div class="icon-prompt">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+            </div>
+            <h2>请先登录</h2>
+            <p>为了更好地追踪您提交的问题，我们需要您使用 GitHub 账号进行授权登录。</p>
+            <button id="login-btn" class="primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                使用 GitHub 登录
+            </button>
         </article>
     </div>
 </main>
+
+<footer class="app-footer container">
+    <small>Powered by Vercel & GitHub. © 2025</small>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.min.js"></script>
 <script src="script.js"></script>
 </body>
