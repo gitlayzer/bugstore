@@ -8,6 +8,7 @@
 body {
     padding: 2rem;
     font-family: var(--font-family);
+    background-color: var(--background-color); /* 确保背景色和编辑器底色一致 */
 }
 
 .container {
@@ -17,6 +18,7 @@ body {
     border: 1px solid var(--contrast-border-color);
     border-radius: var(--border-radius);
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background-color: var(--card-background-color); /* 确保卡片背景色 */
 }
 
 #response-message {
@@ -67,4 +69,21 @@ body {
 
 .hidden {
     display: none !important;
+}
+
+/* Quill 编辑器样式调整 */
+.ql-toolbar.ql-snow {
+    background-color: var(--card-background-color);
+    border-color: var(--contrast-border-color);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+.ql-container.ql-snow {
+    border-color: var(--contrast-border-color);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    color: var(--font-color);
+}
+.ql-editor {
+    min-height: 250px; /* 确保编辑器有最小高度 */
 }

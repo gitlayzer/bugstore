@@ -6,6 +6,32 @@
     <title>Bug 反馈</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <style>
+        /* Quill 编辑器高度 */
+        #editor-container {
+            height: 250px; /* 设置一个合适的高度 */
+            background-color: var(--background-color);
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+        }
+        .ql-toolbar.ql-snow {
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            border-bottom: none;
+        }
+        .ql-container.ql-snow {
+            border-top: none;
+            border-radius: var(--border-radius);
+        }
+        /* 美化登录/注册部分的 hgroup */
+        #logged-out-view hgroup {
+            margin-bottom: 2rem;
+        }
+        #logged-out-view hgroup h1 {
+            margin-bottom: 0.5rem;
+        }
+    </style>
 </head>
 <body>
 <main class="container">
@@ -23,8 +49,8 @@
             <label for="title">问题标题</label>
             <input type="text" id="title" name="title" placeholder="例如：登录按钮点击无效" required>
 
-            <label for="body">详细描述</label>
-            <textarea id="body" name="body" rows="8" placeholder="请提供详细的复现步骤、期望的结果和实际发生的情况。" required></textarea>
+            <label for="body-label">详细描述</label>
+            <div id="editor-container"></div>
 
             <button type="submit" id="submit-btn">提交反馈</button>
         </form>
@@ -41,6 +67,7 @@
         </article>
     </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

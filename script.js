@@ -6,6 +6,8 @@
 // ======================================================
 const GITHUB_CLIENT_ID = 'Ov23liRFQjTyroFo9EhN\n';
 
+let quill; // 定义一个全局变量来存储 Quill 实例
+
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('github_token');
 
@@ -19,6 +21,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('user-avatar').src = user.avatar_url;
             loggedInView.classList.remove('hidden');
             loggedOutView.classList.add('hidden');
+
+            // 初始化 Quill 编辑器
+            quill = new Quill('#editor-container', {
+                theme: 'snow',
+                placeholder: '请在此详细描述您遇到的 Bug...',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['blockquote', 'code-block'],
+                        ['link', 'image'], // 允许插入链接和图片
+                        [{ 'color': [] }, { 'background': [] }],
+                        ['clean']
+                    ]
+                }
+            });
+
         } catch (error) {
             console.error("Token validation failed:", error);
             localStorage.removeItem('github_token');
@@ -63,7 +83,15 @@ document.getElementById('bug-form').addEventListener('submit', async function (e
 
     const form = event.target;
     const title = form.elements.title.value;
-    const body = form.elements.body.value;
+    // 获取 Quill 编辑器中的 HTML 内容
+    const body = quill.root.innerHTML;
+
+    // 检查内容是否为空（即使是 HTML，也检查是否有实际文本内容）
+    if (!title.trim() || !body.trim() || body === '<p><br></p>') {
+        alert('标题和详细描述不能为空！');
+        return;
+    }
+
     const submitBtn = document.getElementById('submit-btn');
     const responseMessage = document.getElementById('response-message');
 
@@ -87,6 +115,7 @@ document.getElementById('bug-form').addEventListener('submit', async function (e
             responseMessage.textContent = `反馈成功！感谢您。Issue 地址： ${result.issue_url}`;
             responseMessage.className = 'success';
             form.reset();
+            quill.root.innerHTML = ''; // 清空 Quill 编辑器内容
         } else {
             throw new Error(result.error || '提交失败，请稍后重试。');
         }
